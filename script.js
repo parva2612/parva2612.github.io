@@ -1,127 +1,167 @@
-// Smooth scrolling for internal links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
-  });
+function getRandomIntStep10(min = 750, max = 1250) {
+  const step = 10;
+  const range = Math.floor((max - min) / step) + 1;
+  const randomStep = Math.floor(Math.random() * range);
+  return min + randomStep * step;
+}
+
+// ===== LOADER =====
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  setTimeout(() => loader.classList.add("fade-out"), getRandomIntStep10());
 });
 
-function validateForm() {
-  const message = document.getElementById('message');
-  if (message.value.trim().length < 20) {
-    alert("Message must be at least 20 characters long.");
-    message.focus();
-    return false;
-  }
-  return true;
+// ===== FLOATING BACKGROUND (SUBTLE PARTICLES) =====
+const canvasBG = document.getElementById("floatingBackground");
+const ctxBG = canvasBG.getContext("2d");
+let particles = [];
+
+function resizeCanvasBG() {
+  canvasBG.width = window.innerWidth;
+  canvasBG.height = window.innerHeight;
 }
+resizeCanvasBG();
+window.addEventListener("resize", resizeCanvasBG);
 
+function createParticles() {
+  particles = [];
+  for (let i = 0; i < 30; i++) {
+    particles.push({
+      x: Math.random() * canvasBG.width,
+      y: Math.random() * canvasBG.height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.3,
+      dy: (Math.random() - 0.5) * 0.3,
+      color: Math.random() > 0.5 ? "rgba(0,188,212,0.2)" : "rgba(255,64,129,0.2)"
+    });
+  }
+}
+createParticles();
 
-// ===== Floating Objects Background =====
-const canvas = document.getElementById("floatingBackground");
-const ctx = canvas.getContext("2d");
-let floatingObjects = [];
-let images = [];
-let numObjects = 20; // total number of floating items
-const folder = "elements/";
+function animateBG() {
+  ctxBG.clearRect(0, 0, canvasBG.width, canvasBG.height);
+  particles.forEach(p => {
+    ctxBG.beginPath();
+    ctxBG.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctxBG.fillStyle = p.color;
+    ctxBG.fill();
 
-// Automatically load filenames based on pattern
-const suffixes = [
-  "green_christmas_1", "green_christmas_2", "red_christmas_1", "red_christmas_2",
-//   "green_1", "red_christmas_2"
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvasBG.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvasBG.height) p.dy *= -1;
+  });
+  requestAnimationFrame(animateBG);
+}
+animateBG();
+
+// ===== SKILLS CLOUD (RANDOM SLOW DRIFT) =====
+const skills = [
+  "Python", "Pandas", "NumPy", "C++", "SQL", "Redis", "MT5", "React", "PineScript",
+  "Django", "IBKR", "Machine Learning", "Dash", "Plotly", "Streamlit",
+  "APIs", "Data Pipelines", "Low-Latency"
 ];
 
-// Create image list
-// images = suffixes.map(s => `${folder}floating_object_${s}.png`);
-images = suffixes.map(s => `${folder}floating_object_${s}.jpg`);
+const canvas = document.getElementById("skillsCanvas");
+const ctx = canvas.getContext("2d");
+let nodes = [];
 
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
+  const wrapper = document.querySelector(".skills-graph-wrapper");
+  const dpr = window.devicePixelRatio || 1;
 
-class FloatingItem {
-  constructor(img) {
-    this.img = img;
-    this.reset(true);
-  }
+  const width = wrapper.offsetWidth;
+  const height = wrapper.offsetHeight;
 
-  reset(initial = false) {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = 30 + Math.random() * 50;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.speedY = (Math.random() - 0.5) * 0.3;
-    // this.rotation = Math.random() * Math.PI * 2;
-    // this.rotationSpeed = (Math.random() - 0.5) * 0.001;
-    this.rotation = Math.random() * Math.PI * 0;
-    this.rotationSpeed = (Math.random() - 0.5) * 0;
-    this.opacity = 0.2 + Math.random() * 0.7;
-  }
+  canvas.width = width * dpr;
+  canvas.height = height * dpr;
+  canvas.style.width = width + "px";
+  canvas.style.height = height + "px";
 
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    this.rotation += this.rotationSpeed;
-
-    // Wrap around screen edges
-    if (this.x < -this.size) this.x = canvas.width + this.size;
-    if (this.x > canvas.width + this.size) this.x = -this.size;
-    if (this.y < -this.size) this.y = canvas.height + this.size;
-    if (this.y > canvas.height + this.size) this.y = -this.size;
-  }
-
-  draw(ctx) {
-    ctx.save();
-    ctx.globalAlpha = this.opacity;
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.rotation);
-    ctx.drawImage(this.img, -this.size / 2, -this.size / 2, this.size, this.size);
-    ctx.restore();
-  }
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.scale(dpr, dpr);
 }
 
-// ctx.fillStyle = "lime";
-// ctx.font = "24px monospace";
-// ctx.fillText("Canvas Works!", 100, 100);
+function generateNodes() {
+  nodes = [];
+  ctx.font = "14px Inter";
 
-function initFloatingObjects() {
-  const loadedImages = [];
+  const padding = 20;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
 
-  let loadedCount = 0;
-  images.forEach(src => {
-    const img = new Image();
-    img.src = src;
-    img.onload = () => {
-      console.log("Loaded:", src);
-      loadedCount++;
-      loadedImages.push(img);
-      if (loadedCount === images.length) {
-        for (let i = 0; i < numObjects; i++) {
-          const img = loadedImages[Math.floor(Math.random() * loadedImages.length)];
-          floatingObjects.push(new FloatingItem(img));
-        }
-        animateFloatingObjects();
+  let attempts = 0;
+  for (let i = 0; i < skills.length && attempts < 3000; ) {
+    const text = skills[i];
+    const textWidth = ctx.measureText(text).width;
+    const radius = textWidth / 2 + 14;
+
+    const x = Math.random() * (width - 2 * radius - padding * 2) + radius + padding;
+    const y = Math.random() * (height - 2 * radius - padding * 2) + radius + padding;
+
+    let overlap = false;
+    for (const node of nodes) {
+      const dx = node.x - x;
+      const dy = node.y - y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < node.radius + radius + 10) {
+        overlap = true;
+        break;
       }
-    };
-    img.onerror = () => console.error("Failed to load:", src);
+    }
+
+    if (!overlap) {
+      nodes.push({ text, x, y, radius });
+      i++;
+    }
+    attempts++;
+  }
+}
+
+function drawGraph() {
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  ctx.clearRect(0, 0, width, height);
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = "14px Inter";
+
+  // Draw connections
+  ctx.strokeStyle = "rgba(255,255,255,0.08)";
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      if (Math.random() > 0.8) {
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Draw nodes
+  nodes.forEach(n => {
+    // Circle
+    ctx.beginPath();
+  ctx.fillStyle = Math.random() > 0.5
+    ? "rgba(0,188,212,0.8)"
+    : "rgba(255,64,129,0.8)";
+    ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Text
+    ctx.fillStyle = "#fff";
+    ctx.fillText(n.text, n.x, n.y);
   });
 }
 
-function animateFloatingObjects() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  floatingObjects.forEach(obj => {
-    obj.update();
-    obj.draw(ctx);
-  });
-
-  requestAnimationFrame(animateFloatingObjects);
+function initGraph() {
+  resizeCanvas();
+  generateNodes();
+  drawGraph();
 }
 
-initFloatingObjects();
-
+window.addEventListener("load", initGraph);
+window.addEventListener("resize", initGraph);

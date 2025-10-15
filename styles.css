@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
-  --bg: #0f1116;
-  --card: #1a1d25;
+  --bg: #0b0d12;
+  --card: rgba(20, 22, 30, 0.6);
   --text: #e6e6e6;
   --accent: #00bcd4;
   --highlight: #ff4081;
 }
 
+/* ========== GLOBAL ========== */
 * {
   margin: 0;
   padding: 0;
@@ -18,25 +19,60 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-header.hero {
+/* ========== LOADER ========== */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: #0f0;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+#loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ========== HERO ========== */
+.hero {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: radial-gradient(circle at 20% 30%, #1b2130, #0f1116);
+  background: transparent;
+    z-index: 5; /* ensures it's above the canvas */
+  color: #fff; /* visible fallback color */
+  margin: 10px;
 }
-
 .hero-content h1 {
   font-size: 3rem;
-  color: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--highlight));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* ensures visibility on WebKit browsers */
+  color: transparent; /* fallback */
+  text-shadow: 0 0 20px rgba(0, 188, 212, 0.3), 0 0 40px rgba(255, 64, 129, 0.2);
+}
+.hero-content {
+  position: relative;
+  z-index: 6; /* above background and any other layers */
 }
 
 .hero-content h2 {
-  color: var(--highlight);
+  color: var(--accent);
   margin-top: 0.5rem;
 }
 
@@ -47,30 +83,54 @@ header.hero {
 }
 
 .btn {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), var(--highlight));
   color: #fff;
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 30px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255,64,129,0.4);
 }
-
 .btn:hover {
-  background: var(--highlight);
   transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,188,212,0.6);
 }
 
+/* ========== SECTIONS ========== */
 .section {
-  padding: 80px 10%;
-  text-align: center;
+  padding: 40px 10%;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 1s ease;
+}
+
+.glass {
+  background: var(--card);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  margin: 40px 10%;
 }
 
 .section h2 {
+  text-align: center;
+  font-size: 2rem;
   color: var(--accent);
   margin-bottom: 1.5rem;
-  font-size: 2rem;
+}
+
+/* ========== CARDS & GRID ========== */
+.skills-graph-wrapper {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+  margin-top: 30px;
+  /* background: rgba(255, 255, 255, 0.02);  */
+  background: transparent;
 }
 
 .tech-grid, .skills-grid {
@@ -81,31 +141,27 @@ header.hero {
 }
 
 .tech-card, .skill {
-  background: var(--card);
+  background: rgba(30, 34, 44, 0.7);
   padding: 1rem;
   border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
   transition: 0.3s;
-  border: 1px solid #232836;
 }
-
 .tech-card:hover, .skill:hover {
-  background: var(--accent);
-  color: #fff;
   transform: translateY(-5px);
+  box-shadow: 0 0 10px rgba(0,188,212,0.3);
 }
 
 .exp-card {
-  background: var(--card);
+  background: rgba(30, 34, 44, 0.7);
   border-radius: 15px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  border: 1px solid #232836;
+  border: 1px solid rgba(255,255,255,0.1);
   transition: 0.3s;
 }
-
-.exp-card:hover {
-  border-color: var(--accent);
-}
+.exp-card:hover { border-color: var(--accent); }
 
 .role {
   display: block;
@@ -114,6 +170,7 @@ header.hero {
   margin: 0.5rem 0;
 }
 
+/* ========== CONTACT ========== */
 .contact-form {
   max-width: 500px;
   margin: 2rem auto 0;
@@ -121,71 +178,105 @@ header.hero {
   flex-direction: column;
   gap: 1rem;
 }
-
 .contact-form input, .contact-form textarea {
-  background: #1a1d25;
-  border: 1px solid #232836;
+  background: rgba(20, 22, 30, 0.8);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 8px;
   padding: 0.8rem;
   color: #fff;
   font-size: 1rem;
 }
 
-footer {
-  background: #101218;
-  text-align: center;
-  padding: 1.5rem;
-  border-top: 1px solid #232836;
-  color: #888;
+/* ===== Contact Buttons (Responsive) ===== */
+.contact-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
 }
 
+.contact-link {
+  flex: 1 1 140px;
+  max-width: 180px;
+  background: linear-gradient(135deg, var(--accent), var(--highlight));
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 0.8rem 1.2rem;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255,64,129,0.3);
+  text-decoration: none;
+}
 
-/* ===== Floating Elements Background ===== */
-/* #floatingBackground {
+.contact-link i {
+  margin-right: 8px;
+}
+
+.contact-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,188,212,0.6);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .contact-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-link {
+    width: 80%;
+    max-width: 300px;
+    max-height: 50px;
+  }
+}
+
+a {
+  text-decoration: None;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  position: relative;
+  z-index: 5;  /* must be above canvas (which is z-index: 0) */
+  background: rgba(15,17,22,0.85);
+  text-align: center;
+  padding: 1.5rem;
+  color: #888;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(4px);
+}
+
+/* ========== BACKGROUND CANVAS ========== */
+#floatingBackground, #skillsCanvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
-  background: radial-gradient(circle at 50% 50%, #0e1015, #090b10);
+  background: radial-gradient(ellipse at center, #0a0a0a 20%, #000 80%);
   pointer-events: none;
-  background: #111 !important;
-} */
+}
 
-#floatingBackground {
-  position: fixed;
+#skillsCanvas {
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  /* background: radial-gradient(circle at 50% 50%, #0e1015, #090b10); */
-  background: #171C28;
-  pointer-events: none; /* so clicks go through */
-}
-/* Keep content above the background */
-.hero, .section, footer {
-  position: relative;
-  z-index: 2;
-  background: rgba(15,17,22,0.2); /* subtle, optional */
-  backdrop-filter: blur(2px);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: transparent;
 }
 
-/* Contact link container */
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem; /* Padding between buttons */
-  justify-content: center;
-  margin-top: 1.5rem;
-}
 
-/* Optional: Slight icon sizing adjustment */
-.contact-link i {
-  font-size: 1.1rem;
-}
-
-a {
-  text-decoration: none;
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

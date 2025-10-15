@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="elements/icon_circle.png" type="image/png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Parva Bhavsar | Portfolio</title>
+  <title>P.B. | Data. Dev. Derivatives.</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -71,16 +74,48 @@
   </section>
 
   <!-- Contact -->
+  <!-- <section id="contact" class="section contact"> -->
+    <!-- <h2>Contact Me</h2> -->
+    <!-- <p>Have a project or collaboration in mind? Let’s talk.</p> -->
+    <!-- <form action="https://formspree.io/f/mkgqpdpb" method="POST" class="contact-form"> -->
+      <!-- <input type="text" name="name" placeholder="Your Name" required> -->
+      <!-- <input type="email" name="_replyto" placeholder="Your Email" required> -->
+      <!-- <textarea name="message" placeholder="Your Message" rows="5" required></textarea> -->
+      <!-- <button type="submit" class="btn">Send Message</button> -->
+    <!-- </form> -->
+  <!-- </section> -->
+
+  <!-- Contact -->
   <section id="contact" class="section contact">
     <h2>Contact Me</h2>
     <p>Have a project or collaboration in mind? Let’s talk.</p>
-    <!-- <form action="https://formspree.io/f/mkgqpdpb" method="POST" class="contact-form"> -->
-    <form method="POST" class="contact-form">
+    <!-- <br> -->
+      <form action="https://formspree.io/f/mkgqpdpb" method="POST" class="contact-form">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="_replyto" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <textarea name="message" placeholder="Your Message (minimum 20 characters)" rows="5" required minlength="20"></textarea>
       <button type="submit" class="btn">Send Message</button>
     </form>
+    <br>
+    <hr style="height: 0.25px; border: none; background-color: #FFFFFF50;">
+    <br>
+    
+    <!-- <div class="contact-links">
+      <a href="mailto:parva.creats@gmail.com" class="btn contact-btn" target="_blank" rel="noopener">Email</a>
+      <a href="https://www.linkedin.com/in/parva-bhavsar/" class="btn contact-btn" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/parva2612" class="btn contact-btn" target="_blank" rel="noopener">GitHub</a>
+    </div> -->
+    <div class="contact-links">
+    <a href="mailto:parva.creats@gmail.com" class="btn contact-link" target="_blank" rel="noopener">
+      <i class="fas fa-envelope"></i> Gmail
+    </a>
+    <a href="https://www.linkedin.com/in/parva-bhavsar/" class="btn contact-link" target="_blank" rel="noopener">
+      <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="https://github.com/parva2612" class="btn contact-link" target="_blank" rel="noopener">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </div>
   </section>
 
   <footer>

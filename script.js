@@ -8,6 +8,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+function validateForm() {
+  const message = document.getElementById('message');
+  if (message.value.trim().length < 20) {
+    alert("Message must be at least 20 characters long.");
+    message.focus();
+    return false;
+  }
+  return true;
+}
 
 
 // ===== Floating Objects Background =====

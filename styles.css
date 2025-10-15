@@ -171,3 +171,21 @@ footer {
   background: rgba(15,17,22,0.2); /* subtle, optional */
   backdrop-filter: blur(2px);
 }
+
+/* Contact link container */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* Padding between buttons */
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Optional: Slight icon sizing adjustment */
+.contact-link i {
+  font-size: 1.1rem;
+}
+
+a {
+  text-decoration: none;
+}

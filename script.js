@@ -116,4 +116,3 @@ function animateFloatingObjects() {
 
 initFloatingObjects();
 
-

@@ -15,7 +15,7 @@ const gifts = [
 ];
 
 // Heart is last
-const heart = {emoji: "❤️", message: "Yeee…finally 😌 you found it 💖<br>Happiest Birthday Chokopieeeeee<br><br>My heart is with you now.<br>Please keep it safe until...<br>I come there and meet you ❤️🤗😘"};
+const heart = {emoji: "❤️", message: "Yeee…finally 😌 you found it 💖<br>Happiest Birthday Chokopieeeeee<br><br>My heart is with you now.<br>Please keep it safe my jaanu ❤️🤗😘"};
 
 let totalBoxes = gifts.length + 1; // 8 boxes total
 let clickedCount = 0;

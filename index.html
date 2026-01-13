@@ -1,113 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="elements/icon_circle.png" type="image/png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P.B. | Data. Dev. Derivatives.</title>
-
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="script.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Client Access</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <!-- Loading Screen -->
-  <div id="loader">
-    <div class="terminal-text" id="loaderText">
-      <p>&gt; Initializing trading engine...</p>
-      <p>&gt; Loading systems...</p>
-      <p>&gt; Systems online ✅</p>
-    </div>
-  </div>
+<body class="dark">
 
-  <!-- Background Layers -->
-  <canvas id="floatingBackground"></canvas>
+  <main class="login-container">
+    <h1 class="logo">ACCESS</h1>
+    <p class="subtitle">Secure client portal</p>
 
-  <!-- Header -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>Parva Bhavsar</h1>
-      <h2>Data Analyst → Software Developer</h2>
-      <p class="tagline">Building low-latency automated trading systems • Exploring Machine Learning for Market Insights</p>
-      <a href="#contact" class="btn">Get In Touch</a>
-    </div>
-  </header>
+    <input id="username" type="text" placeholder="Client ID">
+    <input id="password" type="password" placeholder="Passphrase">
+    <button onclick="login()">Continue</button>
 
-  <!-- Freelance Section -->
-  <section id="freelance" class="section glass">
-    <h2>Project-Based Work & Trading Platforms</h2>
-    <p>I design and develop automated trading systems and infrastructure across multiple platforms, with experience in:</p>
-    <div class="tech-grid">
-      <div class="tech-card">MetaTrader (MQL5)</div>
-      <div class="tech-card">IBKR (Interactive Brokers)</div>
-      <div class="tech-card">TradingView (PineScript)</div>
-      <div class="tech-card">CQG</div>
-      <div class="tech-card">Indian Brokers APIs</div>
-      <div class="tech-card">REST / WebSocket Data Feeds</div>
-      <div class="tech-card">Automation Bridges & Order Routers</div>
-    </div>
-  </section>
+    <p id="error"></p>
 
-  <!-- Professional Experience -->
-  <section id="experience" class="section glass">
-    <h2>Professional Experience</h2>
+    <!-- Hint (looks technical, actually revealing) -->
+    <p class="hint">
+      Credentials are case-sensitive.  
+      Personal identifiers recommended.
+    </p>
+  </main>
 
-    <div class="exp-card">
-      <h3>Metal Seven International DMCC</h3>
-      <span class="role">Data Analyst | June 2024 – Present | Dubai, UAE</span>
-      <p>Building internal tools and low-latency systems to streamline trade execution and analysis. Co-managing proprietary capital with automated strategies.</p>
-    </div>
-
-    <div class="exp-card">
-      <h3>EzQuant</h3>
-      <span class="role">Jr. Data Analyst | Dec 2023 – May 2024 | Gandhinagar, India</span>
-      <p>Developed data infrastructure and high-frequency analysis pipelines for derivatives and equity markets, focusing on efficiency and scalability.</p>
-    </div>
-  </section>
-
-  <!-- Canvas-based Graph Block -->
-  <!-- <div class="skills-graph-wrapper">
-    <canvas id="skillsCanvas"></canvas>
-  </div> -->
-
-  <!-- Skills -->
-  <section id="skills" class="section glass">
-  <h2>Technical Skills</h2>
-
-    <div class="skills-graph-wrapper">
-      <canvas id="skillsCanvas"></canvas>
-    </div>
-  </section>
-
-
-  <!-- Contact -->
-  <section id="contact" class="section glass contact">
-    <h2>Contact Me</h2>
-    <p>Have a project or collaboration in mind? Let’s talk.</p>
-    <form action="https://formspree.io/f/mkgqpdpb" method="POST" class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="_replyto" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message (minimum 20 characters)" rows="5" required minlength="20"></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
-    <br>
-    <br><hr style="height: 0.25px; border: none; background-color: #FFFFFF50;"><br>
-
-    <div class="contact-links">
-      <a href="mailto:parva.creats@gmail.com" class="btn contact-link" target="_blank" rel="noopener">
-        <i class="fas fa-envelope"></i> Gmail
-      </a>
-      <a href="https://www.linkedin.com/in/parva-bhavsar/" class="btn contact-link" target="_blank" rel="noopener">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="https://github.com/parva2612" class="btn contact-link" target="_blank" rel="noopener">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-    </div>
-  </section>
-
-  <footer class="'foot">
-    <p>© 2025 Parva Bhavsar | Built with ❤️ & caffeine</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,749 @@
+/* --- Import a nice Google Font --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Body Styles --- */
+body {
+  width: 100vw;
+  height: 100vh;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 1.5;
+  padding: 10px; /* Prevent text from touching edges on mobile */
+  overflow-x: hidden;
+}
+
+/* --- Love Page Box --- */
+.love-box {
+  max-width: 360px;  /* Keeps content readable */
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  margin: 20px; /* Adds breathing room */
+  color:rgba(227, 32, 93, 1)
+}
+
+/* --- Headings & Text --- */
+h1 {
+  font-weight: 600;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-weight: 300;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.soft {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-top: 8px;
+}
+
+/* --- Buttons --- */
+button {
+  margin-top: 16px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: none;
+  background: #ff5e78;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* --- Fade Animations --- */
+.fade-in {
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.fade-out {
+  animation: fadeOut 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(0.95); }
+}
+
+/* --- 2FA Loader --- */
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 30px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Heart Game Cards --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.card {
+  width: 70px;
+  height: 90px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  cursor: pointer;
+  animation: float 2.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.card:active {
+  transform: scale(0.9);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+/* --- Captions for Gift Video --- */
+.caption {
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  animation: fadeCaption 2s 1s forwards;
+}
+
+.caption h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #ff9aa2;
+}
+
+.caption p {
+  margin: 4px 0 0 0;
+  font-size: 16px;
+  color: #ffc6c6;
+}
+
+@keyframes fadeCaption {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Mobile Optimization --- */
+@media (max-width: 480px) {
+  .love-box, .video-container {
+    max-width: 95%;
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  p, .soft, .caption p {
+    font-size: 14px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 70px);
+  }
+}
+
+body.dark {
+  margin: 0;
+  min-height: 100vh;
+  background: #0f1115;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 360px;
+  padding: 24px;
+}
+
+.logo {
+  letter-spacing: 4px;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #a0a0a0;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+input {
+  width: 100%;
+  background: #1a1d23;
+  border: 1px solid #2a2e36;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+}
+
+input::placeholder {
+  color: #777;
+}
+
+button {
+  width: 100%;
+  background: #ffffff;
+  color: #000;
+  border: none;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#error {
+  margin-top: 12px;
+  color: #ff6b6b;
+  font-size: 14px;
+}
+
+.hint {
+  margin-top: 32px;
+  font-size: 11px;
+  color: #444;
+  text-align: center;
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 20px;
+  }
+}
+
+
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #333;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 30px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.hidden {
+  display: none;
+}
+
+.reveal-text {
+  margin-top: 24px;
+  font-size: 15px;
+  color: #cfcfcf;
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  width: 260px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #ff5e78;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff3355;
+}
+
+#error {
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ❤️ Heart Shape */
+.heart {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: beat 1s infinite;
+  margin-bottom: 20px;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -50px;
+  left: 0;
+}
+
+.heart::after {
+  left: 50px;
+  top: 0;
+}
+
+@keyframes beat {
+  0% { transform: scale(1) rotate(-45deg); }
+  50% { transform: scale(1.1) rotate(-45deg); }
+  100% { transform: scale(1) rotate(-45deg); }
+}
+
+/* 🎬 Color grading transition overlay */
+#transition {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 170, 180, 0.15),
+    rgba(255, 120, 150, 0.35),
+    rgba(255, 60, 100, 0.6)
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2s ease-in-out;
+  z-index: 9999;
+}
+
+
+
+#transition.active {
+  opacity: 1;
+}
+
+body.love {
+  background: radial-gradient(
+    circle at top,
+    #ffd1dc,
+    #ff9aa2,
+    #ff6f91
+  );
+  color: #4a0e21;
+}
+
+.game-title {
+  margin-top: 40px;
+  font-size: 28px;
+  color: #5a1028;
+}
+
+.game-subtitle {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 24px;
+  color: #5a1028;
+
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  grid-gap: 16px;
+  justify-content: center;
+}
+
+.card {
+  width: 90px;
+  height: 90px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.3);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:active {
+  transform: scale(0.95);
+}
+
+.result {
+  margin-top: 24px;
+  font-size: 18px;
+  min-height: 24px;
+}
+
+/* 🎈 Game Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.card {
+  width: 70px;
+  height: 90px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  cursor: pointer;
+  animation: float 2.5s ease-in-out infinite;
+  transition: transform 0.2s ease;
+}
+
+.card:active {
+  transform: scale(0.9);
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.result {
+  font-size: 18px;
+  min-height: 24px;
+  text-align: center;
+}
+
+button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: none;
+  background: #ff5e78;
+  color: white;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+
+.letter {
+  max-width: 320px;
+  background: rgba(255,255,255,0.4);
+  padding: 24px;
+  border-radius: 24px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.gift-page {
+  background: #000;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  color: #fff;
+}
+
+.video-container {
+  position: relative;
+  width: 90%;
+  max-width: 480px;
+  margin: auto;
+}
+
+video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 100, 150, 0.5);
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  animation: fadeCaption 2s 1s forwards;
+}
+
+.caption h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #ff9aa2;
+}
+
+.caption p {
+  margin: 4px 0 0 0;
+  font-size: 16px;
+  color: #ffc6c6;
+}
+
+/* Fade-in animations */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeCaption {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s ease;
+}
+
+
+/* --- Card Reveal Animation --- */
+.card {
+  width: 70px;
+  height: 90px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.4s ease;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pop animation for reveal */
+.card.pop {
+  animation: pop 0.4s ease forwards;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* --- Message Highlight Animation --- */
+#result {
+  margin-top: 16px;
+  font-size: 16px;
+  min-height: 24px;
+  transition: all 0.5s ease;
+}
+
+/* Heartbeat effect for messages */
+.message-highlight {
+  font-weight: bold;
+  color: #4a0e21;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Heart glow for the final heart card */
+.card.heart-glow {
+  animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 8px #ff5e78; }
+  to { box-shadow: 0 0 20px #ff9aa2; }
+}
+body.love {
+  background: linear-gradient(135deg, #ff9aa2, #ffdde1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.gift-container {
+  max-width: 480px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+.gift-text h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: #ff5e78;
+}
+
+.gift-text p {
+  font-size: 16px;
+  margin-bottom: 16px;
+  opacity: 0.9;
+}
+
+video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 100, 150, 0.5);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp linear infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+  100% { transform: translateY(-50px) scale(1) ; opacity: 0; }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .gift-container { padding: 16px; }
+  .gift-text h2 { font-size: 20px; }
+  .gift-text p { font-size: 14px; }
+}
+
+
+body {
+  display: flex;
+  height: 100vh;
+  background: #220404;
+ 
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+#title {
+  font-size: 1.2rem;
+  font-family: 'Noto Serif', serif;
+  color: #b37c27;
+  
+  position: fixed;
+  left: 0; right: 0;
+  bottom: 1rem; 
+  text-align: center;
+} 
+
+#canvas {  
+  display: block;
+  margin: 0 auto -500px;
+  
+  filter: url('#blur') blur(1.5px);
+  opacity: 0.9;
+  
+  &::before {
+    content: 'text';
+  }
+}
+
+#candle {
+  display: block;
+  margin: 0 auto 30px;
+  width: 550px;
+  height: auto;
+}
+
+#filter { position: fixed; }

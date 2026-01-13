@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<div id="transition"></div>
+
+<body class="dark">
+
+  <main class="login-container">
+    <h1 class="logo">VERIFY</h1>
+    <p id="status" class="subtitle">
+      Verifying credentials…
+    </p>
+
+    <div class="loader"></div>
+
+    <p id="reveal" class="hidden reveal-text">
+      No code required.<br><br>
+      This system already knows you.
+    </p>
+  </main>
+
+  <!-- <script>
+    if (!sessionStorage.getItem("verified")) {
+      window.location.href = "index.html";
+    }
+
+    setTimeout(() => {
+      document.getElementById("status").innerText =
+        "Identity confirmed.";
+    }, 2000);
+
+    setTimeout(() => {
+      document.getElementById("reveal").classList.remove("hidden");
+    }, 3500);
+
+    setTimeout(() => {
+      window.location.href = "love.html";
+    }, 6000);
+  </script> -->
+  <script>
+  if (!sessionStorage.getItem("verified")) {
+    window.location.href = "index.html";
+  }
+
+  setTimeout(() => {
+    document.getElementById("status").innerText =
+      "Identity confirmed.";
+  }, 2000);
+
+  setTimeout(() => {
+    document.getElementById("reveal").classList.remove("hidden");
+  }, 3500);
+
+  // 🎨 Start color grading transition
+  setTimeout(() => {
+    document.getElementById("transition").classList.add("active");
+  }, 4500);
+
+  // ❤️ Move to love page
+  setTimeout(() => {
+    window.location.href = "love.html";
+  }, 6500);
+</script>
+
+
+</body>
+</html>

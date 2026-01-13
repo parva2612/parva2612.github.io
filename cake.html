@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Make a Wish 🎂</title>
+<audio id="bgMusic" loop>
+  <source src="piano.mp3" type="audio/mpeg">
+</audio>
+<style>
+/* ================== GLOBAL ================== */
+
+/* Intro popup overlay */
+.intro-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.intro-text {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  padding: 22px 28px;
+  border-radius: 18px;
+  color: #fff;
+  font-size: 22px;
+  text-align: center;
+  animation: heartbeat 1.2s infinite;
+}
+
+/* reuse animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+body {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ff9aa2, #ffdde1);
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+}
+
+button {
+  margin-top: 18px;
+  padding: 10px 22px;
+  border-radius: 24px;
+  border: none;
+  background: #ff5e78;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(255, 94, 120, 0.4);
+  transition: transform .3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ================== CAKE ================== */
+#birthday-cake {
+  position: relative;
+  transform: scale(.9);
+}
+
+#birthday-cake:before {
+  content:"";
+  position: absolute;
+  background-color: #fff0f3;
+  width: 400px;
+  height:140px;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform: translate(-50%,-10%);
+  box-shadow: inset -2px -5px #ffe2e6;
+}
+
+.cake {
+  position: absolute;
+  background-color: #ffc1cc;
+  width: 350px;
+  height:130px;
+  transform: translate(-50%,-60%);
+}
+
+.cake:before,
+.cake:after {
+  content:"";
+  position: absolute;
+}
+
+.cake:before,
+.middle,
+.middle:before {
+  border-radius: 50% / 0% 0% 100% 100%;
+  width:350px;
+  height:50px;
+}
+
+.cake:before {
+  background-color: #ffc1cc;
+  top:130px;
+}
+
+.cake:after {
+  background-color: #ff9aa2;
+  width:350px;
+  height:30px;
+  top:50px;
+}
+
+.middle {
+  position: absolute;
+  background-color: #ff9aa2;
+  top:80px;
+}
+
+.middle:before {
+  content:"";
+  position: absolute;
+  background-color: #ffd1dc;
+  top:-35px;
+}
+
+.top {
+  position: absolute;
+  background-color: #ffb3c6;
+  width:350px;
+  height: 90px;
+  border-radius:50%;
+  top:-45px;
+  box-shadow: inset -5px -1px #fff, inset -70px 2px rgba(255,255,255,.25);
+}
+
+.chocs {
+  position: absolute;
+  width: 55px;
+  height:50px;
+  background-color: #ff6f91;
+  top:0;
+  border-radius: 50% / 0% 0% 100% 100%;
+  box-shadow:
+    49px 20px #ff6f91, 98px 25px #ff6f91,
+    147px 30px #ff6f91, 196px 25px #ff6f91,
+    245px 20px #ff6f91, 295px 0 #ff6f91;
+}
+
+/* ================== CANDLES ================== */
+.candles {
+  position: absolute;
+  width:30px;
+  height: 80px;
+  background-color: #ffb3c6;
+  top:-160px;
+  left:-20px;
+  box-shadow: 50px 20px #ffb3c6, -50px 20px #ffb3c6;
+}
+
+.flame,
+.flame2,
+.flame3 {
+  cursor: pointer;
+  width:30px;
+  height: 30px;
+  position: absolute;
+  border-radius: 80% 15% 55% 50% / 55% 15% 80% 50%;
+  background-color: rgba(255, 200, 100, 0.95);
+  transform: rotate(-45deg);
+  animation: flame .6s infinite;
+  filter: drop-shadow(0 0 10px rgba(255,180,120,.8));
+  transition: opacity .6s ease;
+}
+
+.flame { top:-40px; }
+.flame2 { top:-20px; left:-50px; }
+.flame3 { top:-20px; left:50px; }
+
+.flame:before,
+.flame2:before,
+.flame3:before {
+  content:"";
+  position: absolute;
+  width:20px;
+  height:20px;
+  top:5px;
+  left:5px;
+  background-color: rgba(255,140,0,.5);
+}
+
+/* Flame animation */
+@keyframes flame {
+  0%,100% {transform: scaleY(1) rotate(-45deg);}
+  50% {transform: scaleY(1.1) rotate(-45deg);}
+}
+
+/* ================== TEXT ================== */
+.text {
+  position: absolute;
+  width:350px;
+  font-size: 42px;
+  color: #ff5e78;
+  left:-140px;
+  top:100px;
+  opacity:0;
+  transition:.6s;
+  text-align: center;
+}
+
+.text2 {
+  position: absolute;
+  font-size: 18px;
+  width: 320px;
+  top:105px;
+  left:-150px;
+  color: white;
+  text-align: center;
+}
+
+/* Dim cake after blow */
+.cake-fade {
+  opacity: 0.3;
+  transform: scale(0.95);
+  transition: all 0.8s ease;
+}
+
+/* Popup container */
+.gift-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Popup message */
+.gift-message {
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: heartbeat 1.2s infinite;
+}
+
+/* Gift image button */
+.gift-image {
+  width: 140px;
+  cursor: pointer;
+  animation: float 1.5s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.gift-image:hover {
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes heartbeat {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Hidden helper */
+.hidden {
+  display: none;
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- Intro Popup -->
+<div id="introPopup" class="intro-popup">
+  <div class="intro-text">
+    It’s cake time 🎂<br>
+    Close your eyes and make a wish ✨
+  </div>
+</div>
+
+<div id="birthday-cake">
+  <div class="cake">
+    <div class="middle"></div>
+    <div class="chocs"></div>
+    <div class="top"></div>
+  </div>
+
+  <div class="candles">
+    <div class="flame"></div>
+    <div class="flame2"></div>
+    <div class="flame3"></div>
+    <div class="text">Your wish is safe with me 💖</div>
+    <div class="text2">...</div>
+  </div>
+</div>
+
+<!-- Gift Popup -->
+<div id="giftPopup" class="gift-popup hidden">
+  <p class="gift-message">
+    Your wish is safe with me 💖<br>
+    Now it’s time to open your gift 🎁
+  </p>
+
+  <img
+    src="gift.png"
+    alt="Gift"
+    class="gift-image"
+    id="giftImage"
+  />
+</div>
+<button id="giftBtn" class="hidden">Open Your Gift 🎁</button>
+
+<script>
+const introPopup = document.getElementById("introPopup");
+const flames = document.querySelectorAll(".flame, .flame2, .flame3");
+const giftPopup = document.getElementById("giftPopup");
+const cake = document.getElementById("birthday-cake");
+const hint = document.querySelector(".text2");
+
+let blown = false;
+
+/* STEP 1: Auto-hide intro popup */
+setTimeout(() => {
+  introPopup.style.animation = "fadeOut 1.5s ease forwards";
+}, 4000);
+
+/* STEP 2: Candle interaction */
+flames.forEach(flame => {
+  flame.addEventListener("click", () => {
+    if (blown) return;
+    blown = true;
+
+    // Blow candles
+    flames.forEach(f => f.style.opacity = 0);
+
+    // Remove instruction text
+    hint.style.opacity = 0;
+
+    // Fade cake slightly
+    cake.classList.add("cake-fade");
+
+    // Show gift popup
+    setTimeout(() => {
+      giftPopup.classList.remove("hidden");
+    }, 1000);
+  });
+});
+
+// Gift click → redirect
+giftImage.addEventListener("click", () => {
+  document.body.style.opacity = 0;
+  setTimeout(() => {
+    window.location.href = "gift.html";
+  }, 800);
+});
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For You</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<audio id="bgMusic" loop>
+  <source src="piano.mp3" type="audio/mpeg">
+</audio>
+<body class="love center">
+
+  <div class="love-box fade-in">
+    <h1>Happy Birthday, Vidhi 🎂❤️</h1>
+    <p>
+      I have a special gift waiting for you on the other side.
+    </p>
+
+    <p class="soft">
+      But before that…
+        you’ll have to play a little game... 🎈
+    </p>
+
+    <button onclick="goToGame()">
+      Ready to play? 🧸
+    </button>
+  </div>
+
+  <script>
+    function goToGame() {
+      document.body.classList.add("fade-out");
+
+      setTimeout(() => {
+        window.location.href = "teddy-game.html";
+      }, 1200);
+    }
+  </script>
+
+</body>
+</html>

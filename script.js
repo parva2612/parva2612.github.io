@@ -5,11 +5,25 @@ function login() {
   const correctId = "chokopie";
   const correctPass = "betu";
 
-  if (id === correctId && pass === correctPass) {
+  const idLower = id.toLowerCase();
+  const passLower = pass.toLowerCase();
+
+  // console.log(idLower, passLower);
+  // console.log();
+
+  if (idLower.startsWith("chokopie") && passLower.startsWith("betu")) {
     sessionStorage.setItem("verified", "true");
     window.location.href = "2fa.html";
   } else {
     document.getElementById("error").innerText = "Access denied.";
   }
+
+
+  // if (id === correctId && pass === correctPass) {
+  //   sessionStorage.setItem("verified", "true");
+  //   window.location.href = "2fa.html";
+  // } else {
+  //   document.getElementById("error").innerText = "Access denied.";
+  // }
 }
 

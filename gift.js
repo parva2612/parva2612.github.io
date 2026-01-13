@@ -27,3 +27,8 @@ function createHeart() {
 
 // Create hearts periodically
 setInterval(createHeart, 500); // one heart every 0.5s
+
+function goToVideo() {
+  localStorage.removeItem("musicStarted"); // stop piano
+  window.location.href = "https://drive.google.com/file/d/1xYMqPAu32WYop9MrsWWe3NAEW5e0c2FS/view?usp=sharing";
+}
